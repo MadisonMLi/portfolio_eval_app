@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="../../favicon.ico"> -->
+
+    <title>Monte Carlo </title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet"> -->
+
+    <!-- Custom styles for this template -->
+    <link href="../justified-nav.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="masthead">
+        <h2 class="text-muted">FM 5353 - Final Project</h2>
+        <h3 class="text-muted">Using TPT (Table per Type)</h2>
+        <nav>
+          <ul class="nav nav-justified">
+            <li><a href="units.html">1. Units</a></li>
+            <li><a href="exchange.html">2. Exchanges</a></li>
+            <li><a href="market.html">3. Markets</a></li>
+            <li><a href="underlyings.html">4. Underlyings</a></li>
+            <li class="active"><a href="derivatives.html">5. Derivatives</a></li>
+            <li><a href="trades.html">6. Trades</a></li>
+            <li><a href="valuation.html">7. Trade Valuation</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="jumbotron">
+        <h1 id="option_select_display">European Option</h1>
+          <form id="option_select">
+            <input type="radio" name="option_name" value="European" checked> EUROPEAN
+            <input type="radio" name="option_name" value="Asian"> ASIAN
+            <input type="radio" name="option_name" value="Digital"> DIGITAL
+            <input type="radio" name="option_name" value="Range"> RANGE
+            <input type="radio" name="option_name" value="Lookback"> LOOKBACK
+            <input type="radio" name="option_name" value="Barrier"> BARRIER
+          </form>
+          <br>
+          <!-- <button type="button" class="btn btn-default" id="asian_button" style="display: none">Simulate Asian</button> -->
+      </div>
+
+      <div>
+        <div>
+          <table class="table" id="derivativestable" style="width: 95%;">
+            <tr>
+              <!-- <th>ID</th> -->
+              <th>Financial Instrument ID</th>
+              <th>Market ID</th>
+              <th>Underlying ID</th>
+              <th>Expiration Date</th>
+              <th>Strike</th>
+              <th>Is Call?</th>
+              <th>Payout</th>
+              <th>Barrier Level</th>
+              <th>Knock Type</th>
+            </tr>
+            <tr>
+              <td>Need to Refresh</td>
+              <td>Need to Refresh</td>
+              <td>Need to Refresh</td>
+              <td>Need to Refresh</td>
+              <td>Need to Refresh</td>
+              <td>Need to Refresh</td>
+              <td>Need to Refresh</td>
+              <td>Need to Refresh</td>
+              <td>Need to Refresh</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div>
+          <form id="form_derivatives" method="post">
+              <!-- <div class="form-group">
+            <label>Financial Instrument ID (int) [Must Be a New Financial Instrument ID]</label>
+            <input type="number" class="form-control" name="financialstrumentid" step="any" style="width: 20%;">
+          </div> -->
+          <div class="form-group">
+            <label>Market ID (int)</label>
+            <p>[Must be EXISTNG]</p>
+            <input type="number" class="form-control" name="marketid" step="any" style="width: 20%;">
+          </div>
+          <div class="form-group">
+            <label>Underlying ID (int)</label>
+            <p>[Must be EXISTING]</p>
+            <input type="number" class="form-control" name="underlyingid" step="any" style="width: 20%;">
+          </div>
+          <!-- <div class="form-group">
+            <label>derivatives ID (int)</label>
+            <input type="number" class="form-control" name="derivativesid" step="any" style="width: 20%;">
+          </div> -->
+          <div class="form-group">
+            <label>Expiration Date (DateTime)</label>
+            <input id=dateinput-utc" type="date" class="form-control" name="expiration_date" value="2018-06-12T19:30" min="1984-06-07" max="2060-06-14" step="any" style="width: 20%;">
+          </div>
+          <div class="form-group" id="strike_input">
+            <label>Strike (decimal)</label>
+            <input type="number" class="form-control" name="Strike" step="any" style="width: 20%;">
+          </div>
+          <div class="form-group" id="barrierlevel_input" style="display: none;">
+            <label for="barrierlevel">Barrier Level ($)</label>
+            <input type="number" class="form-control" name="barrier_Level" value="85" style="width: 20%;" step="any">
+          </div>
+          <div id="knocktype_input" style="display: none;">
+            <div class="form-group">
+              <label>
+                Knock Type
+                <br>
+                <input type="radio" name="knock_type" value="0" checked>
+                DownAndOut
+              </label>
+            </div>
+            <div class="form-group">
+              <label>
+                <input type="radio" name="knock_type" value="1">
+                UpAndOut
+              </label>
+            </div>
+            <div class="form-group">
+              <label>
+                <input type="radio" name="knock_type" value="2">
+                DownAndIn
+              </label>
+            </div>
+            <div class="form-group">
+              <label>
+                <input type="radio" name="knock_type" value="3">
+                UpAndIn
+              </label>
+            </div>
+          </div>
+          <div class="form-group" id="payout_input" style="display: none;">
+            <label for="payout">Payout ($)</label>
+            <input type="number" class="form-control" name="payout" value="75.0" style="width: 20%;" step="any">
+          </div>
+          <div id="IsCall_input">
+            <div class="form-group">
+              <label>
+                  Is a Call?
+                  <br>
+                  <input type="radio" name="is_Call" value="True" checked>
+                  True
+              </label>
+            </div>
+            <div class="form-group">
+                <label>
+                  <input type="radio" name="is_Call" value="False">
+                  False
+                </label>
+            </div>
+          </div>
+          </form>
+          <h4 style="text-align: center;"">A new Financial Instrument and its ID will be automatically created.</h4>
+          <div class="jumbotron">
+            <button type="button" class="btn btn-success" id="derivatives_submit" value="European">Submit European</button>
+            <button type="button" class="btn btn-primary" id="derivatives_refresh" value="European">Refresh European</button>
+          </div>
+
+      </div>
+
+      <!-- Site footer -->
+      <footer class="footer">
+        <p>&copy; 2022 Madison Li </p>
+      </footer>
+
+    </div> <!-- /container -->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../js/derivatives.js"></script>
+  </body>
+</html>

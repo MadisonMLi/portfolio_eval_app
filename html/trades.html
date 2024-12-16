@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="../../favicon.ico"> -->
+
+    <title>Monte Carlo</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet"> -->
+
+    <!-- Custom styles for this template -->
+    <link href="../justified-nav.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="../../../assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="container">
+      <div class="masthead">
+        <h2 class="text-muted">FM 5353 - Final Project</h2>
+        <h3 class="text-muted">Using TPT (Table per Type)</h2>
+        <nav>
+          <ul class="nav nav-justified">
+            <li><a href="units.html">1. Units</a></li>
+            <li><a href="exchange.html">2. Exchanges</a></li>
+            <li><a href="market.html">3. Markets</a></li>
+            <li><a href="underlyings.html">4. Underlyings</a></li>
+            <li><a href="derivatives.html">5. Derivatives</a></li>
+            <li class="active"><a href="trades.html">6. Trades</a></li>
+            <li><a href="valuation.html">7. Trade Valuation</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="jumbotron">
+        <h1>Trades</h1>
+      </div>
+
+      <div>
+        <table class="table" id="tradestable">
+          <tr>
+            <!-- <th>ID</th> -->
+            <th>ID</th>
+            <th>Financial Instrument ID</th>
+            <th>Quantity</th>
+            <th>Trade Price</th>
+          </tr>
+          <tr>
+            <td>Need to Refresh</td>
+            <td>Need to Refresh</td>
+            <td>Need to Refresh</td>
+            <td>Need to Refresh</td>
+          </tr>
+        </table>
+      </div>
+
+      <div>
+        <div>
+          <form id="form_trades" method="post">
+            <div class="form-group">
+              <label>Trade ID (int)</label>
+              <p>[Must be NEW]</p>
+              <input type="number" class="form-control" name="id" step="any" style="width: 20%;">
+            </div>
+            <div class="form-group">
+              <label>Financial Instrument ID (int)</label>
+              <p>[Must be EXISTING]</p>
+              <input type="number" class="form-control" name="financialinstrumentid" step="any" style="width: 20%;">
+            </div>
+            <div class="form-group">
+              <label>Quantity (int)</label>
+              <input type="number" class="form-control" name="quantity" step="any" style="width: 20%;">
+            </div>
+            <div class="form-group">
+              <label>Trade Price ($)</label>
+              <input type="number" class="form-control" name="trade_price" step="any" style="width: 20%;">
+            </div>
+            <!-- 
+            <div id="underlyingtype"">
+              <div class="form-group">
+                <label>
+                  Financial Instrument Type
+                  <br>
+                  <input type="radio" name="instrument_type" value="Option" checked>
+                  Option
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="instrument_type" value="Underlying">
+                  Underlying
+                </label>
+              </div>
+              <div class="form-group">
+                <label>
+                  <input type="radio" name="instrument_type" value="Futures">
+                  Futures
+                </label>
+              </div>
+            </div> -->
+          </form>
+        </div>
+      </div>
+
+      <div class="jumbotron">
+        <button type="button" class="btn btn-success" id="trades_submit">Submit Trades</button>
+        <button type="button" class="btn btn-primary" id="trades_refresh">Refresh Trades</button>
+      </div>
+
+      <!-- Site footer -->
+      <footer class="footer">
+        <p>&copy; 2022 Madison Li </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../js/trades.js"></script>
+  </body>
+</html>
